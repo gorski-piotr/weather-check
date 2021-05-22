@@ -4,7 +4,7 @@ import MainFeed from "./components/MainFeed";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-gray-600">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="font-bold text-4xl">Weather Check App</h1>

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import WeatherStation from "./WeatherStation";
 
 function MainFeed() {
-  //useState hook (initial value = empty array. We will update it later (when we fetch the data from API))
+  //useState hook for weather data (initial value = empty array. We will update it later (when we fetch the data from API))
   const [weatherData, setWeatherData] = useState([]);
 
   //useEffect with empty array as a second parameter will run the code only once (onMount)
@@ -13,7 +14,8 @@ function MainFeed() {
     })
       .then((res) => res.json())
       .then((resJSON) => {
-        console.log(resJSON);
+        //show in the console if we received the data from the API
+        console.log("resJSON", resJSON);
         //updating the state of weatherData
         setWeatherData(resJSON);
       })
@@ -23,22 +25,33 @@ function MainFeed() {
       });
   }, []);
 
-  console.log("weather data", weatherData);
+  //show in the consol if weatherData updated
+  console.log("weatherData", weatherData);
 
   return (
-    <div className="mt-4">
+    <div className="grid grid-flow-row sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto bg-gray-600">
       {weatherData.map(
         ({
+          id_stacji,
           stacja,
           data_pomiaru,
+          godzina_pomiaru,
           temperatura,
           suma_opadu,
           cisnienie,
           wilgotnosc_wzgledna,
         }) => (
-          <p>
-            City: {stacja}. Date: {data_pomiaru}. Temperature: {temperatura}
-          </p>
+          <WeatherStation
+            //passing props to the WeatherStation component
+            key={id_stacji}
+            city={stacja}
+            date={data_pomiaru}
+            time={godzina_pomiaru}
+            temp={temperatura}
+            precipitation={suma_opadu}
+            pressure={cisnienie}
+            humidity={wilgotnosc_wzgledna}
+          />
         )
       )}
     </div>
