@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
+import MainFeed from "./components/MainFeed";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <h1 className="font-bold text-4xl">Weather Check App</h1>
         <h2 className="text-xl">React.js and Tailwind CSS</h2>
       </header>
+      <MainFeed />
     </div>
   );
 }
