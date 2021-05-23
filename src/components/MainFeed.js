@@ -5,6 +5,7 @@ function MainFeed() {
   //useState hook for weather data (initial value = empty array. We will update it later (when we fetch the data from API))
   const [weatherData, setWeatherData] = useState([]);
 
+  //searchTerm and handleChange - to handle our search input
   const [searchTerm, setSearchTerm] = useState("");
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -38,6 +39,7 @@ function MainFeed() {
       {/* search input */}
       <div className="mt-4">
         <span>Search city in Poland: </span>
+        {/* letters we type into this field will be saved into searchTerm state and used to filter weatherData */}
         <input type="text" value={searchTerm} onChange={handleChange} />
       </div>
 
@@ -45,9 +47,11 @@ function MainFeed() {
       <div className="grid grid-flow-row sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto bg-gray-600">
         {weatherData
           .filter((val) => {
+            // filter to receive only cities thich include letters we typed in the input field
             return val.stacja.toLowerCase().includes(searchTerm.toLowerCase());
           })
           .map(
+            //map through filterred array (destructured props. Polish API that's why its in Polish language)
             ({
               id_stacji,
               stacja,
