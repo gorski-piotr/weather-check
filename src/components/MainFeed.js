@@ -36,6 +36,15 @@ function MainFeed() {
 
   return (
     <div>
+      {/* test button */}
+
+      <button
+        className="w-auto h-auto bg-gray-200 py-2 px-4 m-4 rounded"
+        onClick={() => alert("You pressed the button!")}
+      >
+        Test button
+      </button>
+
       {/* search input */}
       <div className="mt-4">
         <span>Search city in Poland: </span>
