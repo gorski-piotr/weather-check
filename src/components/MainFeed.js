@@ -11,6 +11,9 @@ function MainFeed() {
     setSearchTerm(event.target.value);
   };
 
+  //searchTermFinal (used after clicking the button)
+  const [searchTermFinal, setSearchTermFinal] = useState("");
+
   //useEffect with empty array as a second parameter will run the code only once (onMount)
   useEffect(() => {
     // fetch data from weather API
@@ -34,22 +37,24 @@ function MainFeed() {
   //show in the consol if weatherData updated
   // console.log("weatherData", weatherData);
 
+  //function that runs after button has been pressed
+  const handleClick = () => {
+    setSearchTermFinal(searchTerm);
+  };
+
   return (
     <div>
-      {/* test button */}
-
-      <button
-        className="w-auto h-auto bg-gray-200 py-2 px-4 m-4 rounded"
-        onClick={() => alert("You pressed the button!")}
-      >
-        Test button
-      </button>
-
-      {/* search input */}
+      {/* search field */}
       <div className="mt-4">
         <span>Search city in Poland: </span>
         {/* letters we type into this field will be saved into searchTerm state and used to filter weatherData */}
         <input type="text" value={searchTerm} onChange={handleChange} />
+        <button
+          className="w-auto h-auto bg-gray-200 ml-1 px-2 rounded"
+          onClick={handleClick}
+        >
+          Search
+        </button>
       </div>
 
       {/* grid with all the Weather Stations  */}
@@ -57,7 +62,9 @@ function MainFeed() {
         {weatherData
           .filter((val) => {
             // filter to receive only cities thich include letters we typed in the input field
-            return val.stacja.toLowerCase().includes(searchTerm.toLowerCase());
+            return val.stacja
+              .toLowerCase()
+              .includes(searchTermFinal.toLowerCase());
           })
           .map(
             //map through filterred array (destructured props. Polish API that's why its in Polish language)
