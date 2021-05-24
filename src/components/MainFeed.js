@@ -42,6 +42,11 @@ function MainFeed() {
     setSearchTermFinal(searchTerm);
   };
 
+  const handleReset = () => {
+    setSearchTerm("");
+    setSearchTermFinal("");
+  };
+
   return (
     <div>
       {/* search field */}
@@ -54,6 +59,12 @@ function MainFeed() {
           onClick={handleClick}
         >
           Search
+        </button>
+        <button
+          className="w-auto h-auto bg-gray-200 ml-1 px-2 rounded"
+          onClick={handleReset}
+        >
+          Reset
         </button>
       </div>
 
